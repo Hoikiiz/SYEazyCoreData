@@ -1,5 +1,7 @@
 # SYEazyCoreData
-简单的coredata管理类
+
+
+简单的coredata管理类，提供了一些简单的查询方法，条件查询，排序查询，限制数量等等，也可以使用自定义查询来满足个别的需求
 
 1.使用sharedCoreDataManager方法来创建
 
