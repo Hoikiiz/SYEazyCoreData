@@ -24,7 +24,9 @@ static NSString *cellIdentifier = @"cell";
 
 - (NSArray *)dataArray {
     if (!_dataArray) {
-        _dataArray = [[self.coreDataManager queryObjectFromCoreDataWithEntityName:@"User" sortParamters:@{@"age":@(true)}] mutableCopy];
+        SYEasyCoreDataSortParameter *sp = [[SYEasyCoreDataSortParameter alloc] initWithProper:@"age" acsend:true];
+        SYEasyCoreDataQueryParameter *qp = [[SYEasyCoreDataQueryParameter alloc] initWithKey:@"age" value:@"20" compare:SYEasyCoreDataQueryParameterCompareLess];
+        _dataArray = [[self.coreDataManager queryAllObjectFromCoreDataWithEntityName:@"User" options:@{kSYCoreDataQueryParameters:@[qp],kSYCoreDataSortParameters:@[sp]}] mutableCopy];
     }
     return _dataArray;
 }
@@ -40,6 +42,9 @@ static NSString *cellIdentifier = @"cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     UIBarButtonItem *rightBBI = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(rightBBIClick)];
     self.navigationItem.rightBarButtonItem = rightBBI;
@@ -48,7 +53,14 @@ static NSString *cellIdentifier = @"cell";
 }
 
 - (void)leftBBIClick {
-    
+    for (NSInteger i = 0; i < 100; i ++) {
+        User *user = (User *)[self.coreDataManager managedObjectWithEntityName:@"User"];
+        user.username = @"Counting";
+        user.age = @(i + 1);
+        user.detail = [NSString stringWithFormat:@"Test data %d",arc4random()%1000];
+    }
+    [self.coreDataManager save];
+    [self.tableView reloadData];
 }
 
 - (void)rightBBIClick {

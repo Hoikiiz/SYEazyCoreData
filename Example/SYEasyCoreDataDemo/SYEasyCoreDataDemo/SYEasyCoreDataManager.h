@@ -9,18 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 /**
- *  查询时的筛选条件，格式为
- @{
- 属性1：值1,
- 属性2：值2...
- }
+ *  查询时的筛选条件
  */
 static const NSString *kSYCoreDataQueryParameters = @"kSYCoreDataQueryParameters";
 /**
- *  查询时的排序条件，格式为
- @{
- 属性名：是否升序（bool）...
- }
+ *  查询时的排序条件
  */
 static const NSString *kSYCoreDataSortParameters = @"kSYCoreDataSortParameters";
 
@@ -63,7 +56,7 @@ typedef void(^SYCoreDataManagerCustomQueryHandle)(NSFetchRequest *fetchRequest,N
 /**
  *  条件查询
  */
-- (NSArray *)queryObjectFromCoreDataWithEntityName:(NSString *)entityName paramters:(NSDictionary *)paramters;
+- (NSArray *)queryObjectFromCoreDataWithEntityName:(NSString *)entityName paramters:(NSArray *)paramters;
 
 /**
  *  排序查询所有的对象
@@ -73,7 +66,7 @@ typedef void(^SYCoreDataManagerCustomQueryHandle)(NSFetchRequest *fetchRequest,N
  *  if ascending BOOL is @(true)
  *  if not BOOL is @(false)
  */
-- (NSArray *)queryObjectFromCoreDataWithEntityName:(NSString *)entityName sortParamters:(NSDictionary *)sortParamters;
+- (NSArray *)queryObjectFromCoreDataWithEntityName:(NSString *)entityName sortParamters:(NSArray *)sortParamters;
 /**
  *  排序查询所有的对象
  *
@@ -83,7 +76,7 @@ typedef void(^SYCoreDataManagerCustomQueryHandle)(NSFetchRequest *fetchRequest,N
  *  if not BOOL is @(false)
  *  @param limit         the count of returened array
  */
-- (NSArray *)queryObjectFromCoreDataWithEntityName:(NSString *)entityName sortParamters:(NSDictionary *)sortParamters limit:(NSInteger)limit;
+- (NSArray *)queryObjectFromCoreDataWithEntityName:(NSString *)entityName sortParamters:(NSArray *)sortParamters limit:(NSInteger)limit;
 
 /**
  *  使用可选条件来查询
@@ -101,10 +94,10 @@ typedef void(^SYCoreDataManagerCustomQueryHandle)(NSFetchRequest *fetchRequest,N
  *  删除指定条件的数据
  *
  *  @param entityName 实体名称
- *  @param paramters  指定条件，格式为@{属性1:值1...}
+ *  @param paramters  指定条件,SYEasyCoreDataQueryParameter的数组
  *
  */
-- (BOOL)deleteObjectFromCoreDataWithEntityName:(NSString *)entityName paramters:(NSDictionary *)paramters;
+- (BOOL)deleteObjectFromCoreDataWithEntityName:(NSString *)entityName paramters:(NSArray *)paramters;
 /**
  *  删除所有该表的信息
  *  @param entityName 表名
@@ -140,15 +133,40 @@ typedef NS_ENUM(NSInteger,SYEasyCoreDataQueryParameterCompare) {
     SYEasyCoreDataQueryParameterCompareEqual,
     SYEasyCoreDataQueryParameterCompareMore
 };
-
+/**
+ *  内部类，用来表示一个查询限制
+ */
 @interface SYEasyCoreDataQueryParameter : NSObject
+/**
+ *  限制的属性名称
+ */
 @property (copy, nonatomic) NSString *key;
+/**
+ *  限制的属性值
+ */
 @property (copy, nonatomic) NSString *value;
+/**
+ *  判断关系，小于，等于，大于
+ */
 @property (assign, nonatomic) SYEasyCoreDataQueryParameterCompare compare;
 - (instancetype)initWithKey:(NSString *)key value:(NSString *)value compare:(SYEasyCoreDataQueryParameterCompare)compare;
 @end
+/**
+ *  内部类，用来表示一个排序限制
+ */
+@interface SYEasyCoreDataSortParameter : NSObject
+/**
+ *  排序的属性名称
+ */
+@property (copy, nonatomic) NSString *proper;
+/**
+ *  是否升序
+ */
+@property (assign, nonatomic) BOOL acsend;
 
+- (instancetype)initWithProper:(NSString *)proper acsend:(BOOL)acsend;
 
+@end
 
 
 
