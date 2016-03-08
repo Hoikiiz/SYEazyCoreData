@@ -9,13 +9,14 @@
 #import "ViewController.h"
 #import "SYEasyCoreDataManager.h"
 #import "User+CoreDataProperties.h"
-
+#import "InfoViewController.h"
 static NSString *cellIdentifier = @"cell";
 
-@interface ViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface ViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (strong, nonatomic) SYEasyCoreDataManager *coreDataManager;
+
 @end
 
 @implementation ViewController
@@ -25,8 +26,8 @@ static NSString *cellIdentifier = @"cell";
 - (NSArray *)dataArray {
     if (!_dataArray) {
         SYEasyCoreDataSortParameter *sp = [[SYEasyCoreDataSortParameter alloc] initWithProper:@"age" acsend:true];
-        SYEasyCoreDataQueryParameter *qp = [[SYEasyCoreDataQueryParameter alloc] initWithKey:@"age" value:@"30" compare:SYEasyCoreDataQueryParameterCompareLessOrEqual];
-        _dataArray = [[self.coreDataManager queryAllObjectFromCoreDataWithEntityName:@"User" options:@{kSYCoreDataQueryParameters:@[qp],kSYCoreDataSortParameters:@[sp]}] mutableCopy];
+//        SYEasyCoreDataQueryParameter *qp = [[SYEasyCoreDataQueryParameter alloc] initWithKey:@"age" value:@"30" compare:SYEasyCoreDataQueryParameterCompareLessOrEqual];
+        _dataArray = [[self.coreDataManager queryAllObjectFromCoreDataWithEntityName:@"User" options:@{kSYCoreDataSortParameters:@[sp]}] mutableCopy];
     }
     return _dataArray;
 }
@@ -39,6 +40,12 @@ static NSString *cellIdentifier = @"cell";
 }
 
 #pragma mark - life cycle
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.dataArray = nil;
+    [self.tableView reloadData];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,6 +60,16 @@ static NSString *cellIdentifier = @"cell";
 }
 
 - (void)leftBBIClick {
+    UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"Tips" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: @"Reolad Data",@"Add Data", nil];
+    [al show];
+}
+
+- (void)rightBBIClick {
+    [self.tableView setEditing:!self.tableView.editing animated:YES];
+}
+
+- (void)reloadData {
+    self.dataArray = nil;
     for (NSInteger i = 0; i < 100; i ++) {
         User *user = (User *)[self.coreDataManager managedObjectWithEntityName:@"User"];
         user.username = @"Counting";
@@ -62,12 +79,6 @@ static NSString *cellIdentifier = @"cell";
     [self.coreDataManager save];
     [self.tableView reloadData];
 }
-
-- (void)rightBBIClick {
-    [self.tableView setEditing:!self.tableView.editing animated:YES];
-}
-
-
 
 #pragma mark - UITableViewDataSource
 
@@ -105,5 +116,22 @@ static NSString *cellIdentifier = @"cell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 1:
+            [self reloadData];
+            break;
+        case 2: {
+            InfoViewController *ivc = [[InfoViewController alloc] initWithNibName:@"InfoViewController" bundle:nil];
+            [self.navigationController pushViewController:ivc animated:YES];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 
 @end
