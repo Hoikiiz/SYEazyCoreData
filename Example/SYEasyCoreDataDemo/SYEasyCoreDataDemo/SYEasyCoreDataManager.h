@@ -62,18 +62,14 @@ typedef void(^SYCoreDataManagerCustomQueryHandle)(NSFetchRequest *fetchRequest,N
  *  排序查询所有的对象
  *
  *  @param entityName
- *  @param sortParamters @“property”:@(BOOL),
- *  if ascending BOOL is @(true)
- *  if not BOOL is @(false)
+ *  @param sortParamters NSArray<SYEasyCoreDataSortParameter *>
  */
 - (NSArray *)queryObjectFromCoreDataWithEntityName:(NSString *)entityName sortParamters:(NSArray *)sortParamters;
 /**
  *  排序查询所有的对象
  *
  *  @param entityName
- *  @param sortParamters @“property”:@(BOOL),
- *  if ascending BOOL is @(true)
- *  if not BOOL is @(false)
+ *  @param sortParamters NSArray<SYEasyCoreDataSortParameter *>
  *  @param limit         the count of returened array
  */
 - (NSArray *)queryObjectFromCoreDataWithEntityName:(NSString *)entityName sortParamters:(NSArray *)sortParamters limit:(NSInteger)limit;
