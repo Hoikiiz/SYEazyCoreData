@@ -2,8 +2,8 @@
 //  SYEasyCoreDataManager.m
 //  CoreDataMigrateDemo
 //
-//  Created by WeiCheng—iOS_1 on 16/3/7.
-//  Copyright © 2016年 com.WECH. All rights reserved.
+//  Created by Sunyang on 16/3/7.
+//  Copyright © 2016年 com.sunyang. All rights reserved.
 //
 
 #import "SYEasyCoreDataManager.h"
@@ -182,7 +182,12 @@
             case SYEasyCoreDataQueryParameterCompareMore:
                 predicateString = [NSString stringWithFormat:@"%@>'%@'",key,value];
                 break;
-                
+            case SYEasyCoreDataQueryParameterCompareLessOrEqual:
+                predicateString = [NSString stringWithFormat:@"%@<='%@'",key,value];
+                break;
+            case SYEasyCoreDataQueryParameterCompareMoreOrEqual:
+                predicateString = [NSString stringWithFormat:@"%@>='%@'",key,value];
+                break;
             default:
                 break;
         }

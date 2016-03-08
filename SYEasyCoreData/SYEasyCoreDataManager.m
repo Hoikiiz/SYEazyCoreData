@@ -2,8 +2,8 @@
 //  SYEasyCoreDataManager.m
 //  CoreDataMigrateDemo
 //
-//  Created by WeiCheng—iOS_1 on 16/3/7.
-//  Copyright © 2016年 com.WECH. All rights reserved.
+//  Created by SunYang on 16/3/7.
+//  Copyright © 2016年 com.sunyang. All rights reserved.
 //
 
 #import "SYEasyCoreDataManager.h"
@@ -59,13 +59,13 @@
     return [[self context] executeFetchRequest:request error:nil];
 }
 
-- (NSArray *)queryObjectFromCoreDataWithEntityName:(NSString *)entityName sortParamters:(NSDictionary *)sortParamters
+- (NSArray *)queryObjectFromCoreDataWithEntityName:(NSString *)entityName sortParamters:(NSArray *)sortParamters
 {
     return [self queryObjectFromCoreDataWithEntityName:entityName sortParamters:sortParamters limit:0];
 }
 
 
-- (NSArray *)queryObjectFromCoreDataWithEntityName:(NSString *)entityName sortParamters:(NSDictionary *)sortParamters limit:(NSInteger)limit {
+- (NSArray *)queryObjectFromCoreDataWithEntityName:(NSString *)entityName sortParamters:(NSArray *)sortParamters limit:(NSInteger)limit {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
     if (limit) {
         request.fetchLimit = limit;
@@ -80,7 +80,7 @@
 
 
 
-- (NSArray *)queryObjectFromCoreDataWithEntityName:(NSString *)entityName paramters:(NSDictionary *)paramters
+- (NSArray *)queryObjectFromCoreDataWithEntityName:(NSString *)entityName paramters:(NSArray *)paramters
 {
     //查询对象
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
@@ -118,7 +118,7 @@
     return [self save];
 }
 
-- (BOOL)deleteObjectFromCoreDataWithEntityName:(NSString *)entityName paramters:(NSDictionary *)paramters
+- (BOOL)deleteObjectFromCoreDataWithEntityName:(NSString *)entityName paramters:(NSArray *)paramters
 {
     //1.先找到要删除的对象
     NSArray *deleteObjects = [self queryObjectFromCoreDataWithEntityName:entityName paramters:paramters];
@@ -160,18 +160,38 @@
  *
  *  @return 查询谓词
  */
-- (NSPredicate *)queryParametersHandle:(NSDictionary *)parameters {
+- (NSPredicate *)queryParametersHandle:(NSArray *)parameters {
     //存在NSPredicate对象
     NSMutableArray *predicates = [NSMutableArray array];
     
     //遍历参数
-    for (NSString *key in parameters)
+    for (SYEasyCoreDataQueryParameter *queryParameter in parameters)
     {
         //初始化条件对象
         //key = 'value'
-        NSString *string = [NSString stringWithFormat:@"%@='%@'",key,parameters[key]];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:string];
+        NSString *key = queryParameter.key;
+        NSString *value = queryParameter.value;
+        NSString *predicateString;
+        switch (queryParameter.compare) {
+            case SYEasyCoreDataQueryParameterCompareLess:
+                predicateString = [NSString stringWithFormat:@"%@<'%@'",key,value];
+                break;
+            case SYEasyCoreDataQueryParameterCompareEqual:
+                predicateString = [NSString stringWithFormat:@"%@='%@'",key,value];
+                break;
+            case SYEasyCoreDataQueryParameterCompareMore:
+                predicateString = [NSString stringWithFormat:@"%@>'%@'",key,value];
+                break;
+            case SYEasyCoreDataQueryParameterCompareLessOrEqual:
+                predicateString = [NSString stringWithFormat:@"%@<='%@'",key,value];
+                break;
+            case SYEasyCoreDataQueryParameterCompareMoreOrEqual:
+                predicateString = [NSString stringWithFormat:@"%@>='%@'",key,value];
+                break;
+            default:
+                break;
+        }
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:predicateString];
         
         [predicates addObject:predicate];
     }
@@ -194,18 +214,19 @@
  *
  *  @return NSArray<NSSortDescriptor *>
  */
-- (NSArray *)querySortParametersHandle:(NSDictionary *)sortParameters {
+- (NSArray *)querySortParametersHandle:(NSArray *)sortParameters {
     //存放排序对象
     NSMutableArray *sortArray = [NSMutableArray array];
     
     //
-    for (NSString *key in sortParameters)
+    for (SYEasyCoreDataSortParameter *sortParameter in sortParameters)
     {
         //取值
-        NSNumber *value = sortParameters[key];
+        BOOL ascend = sortParameter.acsend;
+        NSString *proper = sortParameter.proper;
         
         //排序
-        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:key ascending:[value boolValue]];
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:proper ascending:ascend];
         
         [sortArray addObject:sort];
     }
@@ -224,4 +245,39 @@
     return  app.managedObjectContext;
 }
 
+
 @end
+
+#pragma mark - SYEasyCoreDataQueryParameter
+
+@implementation SYEasyCoreDataQueryParameter
+
+- (instancetype)initWithKey:(NSString *)key value:(NSString *)value compare:(SYEasyCoreDataQueryParameterCompare)compare {
+    if (self = [super init]) {
+        self.key = key;
+        self.value = value;
+        self.compare = compare;
+    }
+    return self;
+}
+@end
+
+#pragma mark - SYEasyCoreDataSortParameter
+
+@implementation SYEasyCoreDataSortParameter
+
+- (instancetype)initWithProper:(NSString *)proper acsend:(BOOL)acsend {
+    if (self = [super init]) {
+        self.proper = proper;
+        self.acsend = acsend;
+    }
+    return self;
+}
+
+@end
+
+
+
+
+
+

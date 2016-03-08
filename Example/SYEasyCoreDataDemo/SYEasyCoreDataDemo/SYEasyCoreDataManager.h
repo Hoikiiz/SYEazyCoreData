@@ -2,8 +2,8 @@
 //  SYEasyCoreDataManager.h
 //  CoreDataMigrateDemo
 //
-//  Created by WeiCheng—iOS_1 on 16/3/7.
-//  Copyright © 2016年 com.WECH. All rights reserved.
+//  Created by SunYang on 16/3/7.
+//  Copyright © 2016年 com.sunyang. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -130,7 +130,9 @@ typedef void(^SYCoreDataManagerCustomQueryHandle)(NSFetchRequest *fetchRequest,N
 
 typedef NS_ENUM(NSInteger,SYEasyCoreDataQueryParameterCompare) {
     SYEasyCoreDataQueryParameterCompareLess,
+    SYEasyCoreDataQueryParameterCompareLessOrEqual,
     SYEasyCoreDataQueryParameterCompareEqual,
+    SYEasyCoreDataQueryParameterCompareMoreOrEqual,
     SYEasyCoreDataQueryParameterCompareMore
 };
 /**

@@ -2,7 +2,7 @@
 //  ViewController.m
 //  SYEasyCoreDataDemo
 //
-//  Created by WeiCheng—iOS_1 on 16/3/7.
+//  Created by SunYang on 16/3/7.
 //  Copyright © 2016年 com.sunyang. All rights reserved.
 //
 
@@ -25,7 +25,7 @@ static NSString *cellIdentifier = @"cell";
 - (NSArray *)dataArray {
     if (!_dataArray) {
         SYEasyCoreDataSortParameter *sp = [[SYEasyCoreDataSortParameter alloc] initWithProper:@"age" acsend:true];
-        SYEasyCoreDataQueryParameter *qp = [[SYEasyCoreDataQueryParameter alloc] initWithKey:@"age" value:@"20" compare:SYEasyCoreDataQueryParameterCompareLess];
+        SYEasyCoreDataQueryParameter *qp = [[SYEasyCoreDataQueryParameter alloc] initWithKey:@"age" value:@"30" compare:SYEasyCoreDataQueryParameterCompareLessOrEqual];
         _dataArray = [[self.coreDataManager queryAllObjectFromCoreDataWithEntityName:@"User" options:@{kSYCoreDataQueryParameters:@[qp],kSYCoreDataSortParameters:@[sp]}] mutableCopy];
     }
     return _dataArray;
