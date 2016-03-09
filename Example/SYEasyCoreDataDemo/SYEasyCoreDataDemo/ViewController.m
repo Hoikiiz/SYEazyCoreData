@@ -26,7 +26,7 @@ static NSString *cellIdentifier = @"cell";
 - (NSArray *)dataArray {
     if (!_dataArray) {
         SYEasyCoreDataSortParameter *sp = [[SYEasyCoreDataSortParameter alloc] initWithProper:@"age" acsend:true];
-//        SYEasyCoreDataQueryParameter *qp = [[SYEasyCoreDataQueryParameter alloc] initWithKey:@"age" value:@"30" compare:SYEasyCoreDataQueryParameterCompareLessOrEqual];
+//        SYEasyCoreDataQueryParameter *qp = [[SYEasyCoreDataQueryParameter alloc] initWithKey:@"age" value:@"30" compare:SYEasyCoreDataQueryParameterCompareNotEqual];
         _dataArray = [[self.coreDataManager queryAllObjectFromCoreDataWithEntityName:@"User" options:@{kSYCoreDataSortParameters:@[sp]}] mutableCopy];
     }
     return _dataArray;

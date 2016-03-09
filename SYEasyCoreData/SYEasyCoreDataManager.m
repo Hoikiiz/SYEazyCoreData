@@ -2,7 +2,7 @@
 //  SYEasyCoreDataManager.m
 //  CoreDataMigrateDemo
 //
-//  Created by SunYang on 16/3/7.
+//  Created by Sunyang on 16/3/7.
 //  Copyright © 2016年 com.sunyang. All rights reserved.
 //
 
@@ -188,7 +188,11 @@
             case SYEasyCoreDataQueryParameterCompareMoreOrEqual:
                 predicateString = [NSString stringWithFormat:@"%@>='%@'",key,value];
                 break;
+            case SYEasyCoreDataQueryParameterCompareNotEqual:
+                predicateString = [NSString stringWithFormat:@"%@!='%@'",key,value];
+                break;
             default:
+                predicateString = [NSString stringWithFormat:@"%@='%@'",key,value];
                 break;
         }
         NSPredicate *predicate = [NSPredicate predicateWithFormat:predicateString];

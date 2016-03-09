@@ -188,7 +188,11 @@
             case SYEasyCoreDataQueryParameterCompareMoreOrEqual:
                 predicateString = [NSString stringWithFormat:@"%@>='%@'",key,value];
                 break;
+                case SYEasyCoreDataQueryParameterCompareNotEqual:
+                predicateString = [NSString stringWithFormat:@"%@!='%@'",key,value];
+                break;
             default:
+                predicateString = [NSString stringWithFormat:@"%@='%@'",key,value];
                 break;
         }
         NSPredicate *predicate = [NSPredicate predicateWithFormat:predicateString];

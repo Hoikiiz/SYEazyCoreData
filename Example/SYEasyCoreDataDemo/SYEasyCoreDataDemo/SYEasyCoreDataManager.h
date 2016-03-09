@@ -129,7 +129,8 @@ typedef NS_ENUM(NSInteger,SYEasyCoreDataQueryParameterCompare) {
     SYEasyCoreDataQueryParameterCompareLessOrEqual,
     SYEasyCoreDataQueryParameterCompareEqual,
     SYEasyCoreDataQueryParameterCompareMoreOrEqual,
-    SYEasyCoreDataQueryParameterCompareMore
+    SYEasyCoreDataQueryParameterCompareMore,
+    SYEasyCoreDataQueryParameterCompareNotEqual
 };
 /**
  *  内部类，用来表示一个查询限制
