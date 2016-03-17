@@ -19,7 +19,7 @@
 		549AA07A1C8D32F600522BBA /* SYEasyCoreDataDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 549AA0791C8D32F600522BBA /* SYEasyCoreDataDemoTests.m */; };
 		549AA0881C8D35D400522BBA /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 549AA0851C8D35D400522BBA /* User+CoreDataProperties.m */; };
 		549AA0891C8D35D400522BBA /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 549AA0871C8D35D400522BBA /* User.m */; };
-		549AA08E1C8D373800522BBA /* SYEasyCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 549AA08D1C8D373800522BBA /* SYEasyCoreDataManager.m */; };
+		54B134321C9A4E2D00607592 /* SYEasyCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B134311C9A4E2D00607592 /* SYEasyCoreDataManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +54,8 @@
 		549AA0851C8D35D400522BBA /* User+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataProperties.m"; sourceTree = "<group>"; };
 		549AA0861C8D35D400522BBA /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		549AA0871C8D35D400522BBA /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		549AA08C1C8D373800522BBA /* SYEasyCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEasyCoreDataManager.h; sourceTree = "<group>"; };
-		549AA08D1C8D373800522BBA /* SYEasyCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEasyCoreDataManager.m; sourceTree = "<group>"; };
+		54B134301C9A4E2D00607592 /* SYEasyCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEasyCoreDataManager.h; sourceTree = "<group>"; };
+		54B134311C9A4E2D00607592 /* SYEasyCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEasyCoreDataManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,9 +104,8 @@
 				549AA0631C8D32F600522BBA /* ViewController.m */,
 				54378DF61C8E61CF004007C1 /* InfoViewController.h */,
 				54378DF71C8E61CF004007C1 /* InfoViewController.m */,
+				54B1342F1C9A4E2D00607592 /* SYEasyCoreData */,
 				54378DF81C8E61CF004007C1 /* InfoViewController.xib */,
-				549AA08C1C8D373800522BBA /* SYEasyCoreDataManager.h */,
-				549AA08D1C8D373800522BBA /* SYEasyCoreDataManager.m */,
 				549AA0651C8D32F600522BBA /* Main.storyboard */,
 				549AA06B1C8D32F600522BBA /* Assets.xcassets */,
 				549AA06D1C8D32F600522BBA /* LaunchScreen.storyboard */,
@@ -143,6 +142,15 @@
 				549AA0871C8D35D400522BBA /* User.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		54B1342F1C9A4E2D00607592 /* SYEasyCoreData */ = {
+			isa = PBXGroup;
+			children = (
+				54B134301C9A4E2D00607592 /* SYEasyCoreDataManager.h */,
+				54B134311C9A4E2D00607592 /* SYEasyCoreDataManager.m */,
+			);
+			path = SYEasyCoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,8 +259,8 @@
 				54378DF91C8E61CF004007C1 /* InfoViewController.m in Sources */,
 				549AA0891C8D35D400522BBA /* User.m in Sources */,
 				549AA06A1C8D32F600522BBA /* SYEasyCoreDataDemo.xcdatamodeld in Sources */,
-				549AA08E1C8D373800522BBA /* SYEasyCoreDataManager.m in Sources */,
 				549AA0611C8D32F600522BBA /* AppDelegate.m in Sources */,
+				54B134321C9A4E2D00607592 /* SYEasyCoreDataManager.m in Sources */,
 				549AA05E1C8D32F600522BBA /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

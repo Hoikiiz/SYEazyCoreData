@@ -170,7 +170,7 @@
         //初始化条件对象
         //key = 'value'
         NSString *key = queryParameter.key;
-        NSString *value = queryParameter.value;
+        id value = queryParameter.value;
         NSString *predicateString;
         switch (queryParameter.compare) {
             case SYEasyCoreDataQueryParameterCompareLess:
@@ -188,7 +188,7 @@
             case SYEasyCoreDataQueryParameterCompareMoreOrEqual:
                 predicateString = [NSString stringWithFormat:@"%@>='%@'",key,value];
                 break;
-                case SYEasyCoreDataQueryParameterCompareNotEqual:
+            case SYEasyCoreDataQueryParameterCompareNotEqual:
                 predicateString = [NSString stringWithFormat:@"%@!='%@'",key,value];
                 break;
             default:
@@ -256,7 +256,7 @@
 
 @implementation SYEasyCoreDataQueryParameter
 
-- (instancetype)initWithKey:(NSString *)key value:(NSString *)value compare:(SYEasyCoreDataQueryParameterCompare)compare {
+- (instancetype)initWithKey:(NSString *)key value:(id)value compare:(SYEasyCoreDataQueryParameterCompare)compare {
     if (self = [super init]) {
         self.key = key;
         self.value = value;

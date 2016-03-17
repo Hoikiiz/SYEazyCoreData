@@ -143,12 +143,12 @@ typedef NS_ENUM(NSInteger,SYEasyCoreDataQueryParameterCompare) {
 /**
  *  限制的属性值
  */
-@property (copy, nonatomic) NSString *value;
+@property (copy, nonatomic) id value;
 /**
  *  判断关系，小于，等于，大于
  */
 @property (assign, nonatomic) SYEasyCoreDataQueryParameterCompare compare;
-- (instancetype)initWithKey:(NSString *)key value:(NSString *)value compare:(SYEasyCoreDataQueryParameterCompare)compare;
+- (instancetype)initWithKey:(NSString *)key value:(id)value compare:(SYEasyCoreDataQueryParameterCompare)compare;
 @end
 /**
  *  内部类，用来表示一个排序限制
